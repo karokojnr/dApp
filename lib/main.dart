@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'pages/home_page.dart';
+import 'services/feed_service.dart';
 
 void main() {
-  runApp(const DApp());
+  runApp(const MyApp());
 }
 
-class DApp extends StatelessWidget {
-  const DApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'dApp',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) => FeedService(),
+      child: MaterialApp(
+        title: 'DApp Feed',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            colorScheme: const ColorScheme.dark(primary: Colors.cyanAccent)),
+        home: const HomePage(),
       ),
-      home: const Scaffold(),
     );
   }
 }
